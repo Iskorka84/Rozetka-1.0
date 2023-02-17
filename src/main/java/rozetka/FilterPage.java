@@ -11,6 +11,7 @@ import java.time.Duration;
 public class FilterPage {
     public final WebDriver driver;
 
+    private static final By FILTER_SELLER = By.xpath("//*[@data-filter-name='seller']");
     private static final By ROZETKA_SELLER = By.xpath("//a[@data-id='Rozetka']");
     private static final By OTHER_SELLERS = By.xpath("//a[@data-id='Інші продавці']");
     private static final By SELECTION_RESULT = By.xpath("//p[@class='catalog-selection__label ng-star-inserted']");
@@ -28,8 +29,13 @@ public class FilterPage {
     }
 
     public WebElement verifySearchResult() {
-        return new WebDriverWait(driver, Duration.ofSeconds(10))
+        return new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(ExpectedConditions.visibilityOfElementLocated(SELECTION_RESULT));
+    }
+
+    public WebElement goToFilterMenu() {
+        return new WebDriverWait(driver, Duration.ofSeconds(40))
+                .until(ExpectedConditions.presenceOfElementLocated(FILTER_SELLER));
     }
 
 }

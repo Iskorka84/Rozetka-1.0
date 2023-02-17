@@ -26,7 +26,8 @@ public class RozetkaPage {
     }
 
     public WebElement goToPaginationArea() {
-        return driver.findElement(PAGINATION_AREA);
+        return new WebDriverWait(driver, Duration.ofSeconds(20))
+                .until(ExpectedConditions.presenceOfElementLocated(PAGINATION_AREA));
     }
 
     public int getPageNumber (WebElement page) {
@@ -42,23 +43,24 @@ public class RozetkaPage {
     }
 
     public void goToPageByNumber (int pageNumber) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOfElementLocated(PAGES));
+        new WebDriverWait(driver, Duration.ofSeconds(40))
+                .until(ExpectedConditions.visibilityOfAllElementsLocatedBy(PAGES));
         List<WebElement> pages = driver.findElements(PAGES);
         for (int i = 0; i < pages.size(); i++) {
             if (getPageNumber(pages.get(i)) == pageNumber) {
                 pages.get(i).click();
+                break;
             }
         }
     }
 
     public void goToTheNextPage () {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(ExpectedConditions.visibilityOfElementLocated(NEXT_PAGE)).click();
     }
 
     public void goToThePreviousPage () {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(ExpectedConditions.visibilityOfElementLocated(PREVIOUS_PAGE)).click();
     }
 

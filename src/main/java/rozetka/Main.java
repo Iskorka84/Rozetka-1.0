@@ -21,26 +21,34 @@ public class Main {
             chromeDriver.executeScript("arguments[0].scrollIntoView(true);", pagination);
 
             rozetkaPage.goToTheNextPage();
+            rozetkaPage.goToPaginationArea();
             chromeDriver.executeScript("arguments[0].scrollIntoView(true);", pagination);
 
             rozetkaPage.goToThePreviousPage();
+            rozetkaPage.goToPaginationArea();
             chromeDriver.executeScript("arguments[0].scrollIntoView(true);", pagination);
 
             rozetkaPage.goToPageByNumber(5);
+            rozetkaPage.goToPaginationArea();
             chromeDriver.executeScript("arguments[0].scrollIntoView(true);", pagination);
 
             rozetkaPage.goToPageByNumber(8);
+            rozetkaPage.goToPaginationArea();
             chromeDriver.executeScript("arguments[0].scrollIntoView(true);", pagination);
 
             rozetkaPage.goToPageByNumber(67);
+            rozetkaPage.goToPaginationArea();
             chromeDriver.executeScript("arguments[0].scrollIntoView(true);", pagination);
 
             rozetkaPage.goToPageByNumber(1);
- //           chromeDriver.executeScript("arguments[0].scrollIntoView(true);", pagination);
 
-            FilterPage filter = new FilterPage(chromeDriver);
-            filter.filteringBySellerRozetka();
-            System.out.println(filter.verifySearchResult().getText());
+            rozetkaPage.loadPage();
+
+            FilterPage filterPage = new FilterPage(chromeDriver);
+            WebElement filter = filterPage.goToFilterMenu();
+            chromeDriver.executeScript("arguments[0].scrollIntoView(true);", filter);
+            filterPage.filteringBySellerRozetka();
+            System.out.println(filterPage.verifySearchResult().getText());
 
 
 
